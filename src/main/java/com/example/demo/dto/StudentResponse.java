@@ -7,15 +7,17 @@ public class StudentResponse {
     private  String lastName;
     private  String email;
     private  String maskedPhoneNumber;
+    private String maskedtcNo;
 
     public StudentResponse() {}
 
-    public StudentResponse(int id, String firstName, String lastName, String email, String maskedPhoneNumber) {
+    public StudentResponse(int id, String firstName, String lastName, String email, String maskedPhoneNumber, String maskedtcNo) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.maskedPhoneNumber = maskedPhoneNumber;
+        this.maskedtcNo = maskedtcNo;
     }
     public int getId() {
         return id;
@@ -47,4 +49,6 @@ public class StudentResponse {
     public void setMaskedPhoneNumber(String maskedPhoneNumber) {
         this.maskedPhoneNumber = maskedPhoneNumber;
     }
+    public String getMaskedtcNo() {return maskedtcNo;}
+    public void setMaskedtcNo(String maskedtcNo) {this.maskedtcNo = maskedtcNo;}
 }

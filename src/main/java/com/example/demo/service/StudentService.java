@@ -4,6 +4,7 @@ import com.example.demo.dto.NameResponse;
 import com.example.demo.model.Student;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.util.PhoneMaskUtil;
+import com.example.demo.util.TcNoMaskUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,7 @@ public class StudentService {
         if (studentRepository.existsByEmail(student.getEmail())) {
             throw new IllegalArgumentException("Bu email zaten kayıtlı");
         }
+
     }
 
     private void validateStudentForUpdate(Student student) {
@@ -75,6 +77,7 @@ public class StudentService {
         if (studentRepository.existsByEmailAndIdNot(student.getEmail(), student.getId())) {
             throw new IllegalArgumentException("Bu email başka bir öğrenciye ait");
         }
+
     }
 
     private void basicFieldChecks(Student student) {
@@ -92,6 +95,9 @@ public class StudentService {
 
         if (student.getPhoneNumber() == null || student.getPhoneNumber().isBlank()) {
             throw new IllegalArgumentException("Telefon alanı boş olamaz");
+        }
+        if (student.getTcNo() == null || student.getTcNo().isBlank()) {
+            throw new IllegalArgumentException("Tc no boş olamaz");
         }
     }
 
@@ -123,6 +129,10 @@ public class StudentService {
         if (student.getPhoneNumber() != null) {
             student.setPhoneNumber(student.getPhoneNumber().trim());
         }
+
+        if (student.getTcNo() != null) {
+            student.setTcNo(student.getTcNo().trim());
+        }
     }
 
     private String capitalize(String text) {
@@ -133,9 +143,6 @@ public class StudentService {
                 text.substring(1).toLowerCase();
     }
 
-    public String maskPhoneNumber(String phone) {
-        return PhoneMaskUtil.mask(phone);
-    }
 
     // NameResponse
     public NameResponse processName(String firstName) {
@@ -145,4 +152,9 @@ public class StudentService {
     public NameResponse processEmail(String email) {
         return new NameResponse(email, email.length());
     }
+
+    public  NameResponse processPhoneNumber(String phoneNumber) {return new NameResponse(phoneNumber, phoneNumber.length());}
+
+    public NameResponse processTcNo(String tcNo) {return new NameResponse(tcNo, tcNo.length());}
+
 }

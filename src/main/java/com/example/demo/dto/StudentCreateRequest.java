@@ -5,6 +5,7 @@ package com.example.demo.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.hibernate.engine.spi.ManagedEntity;
 
 public class StudentCreateRequest {
 
@@ -18,6 +19,9 @@ public class StudentCreateRequest {
     @NotBlank(message = "Telefon numarası boş olamaz")
     @Size(min = 10, max = 20,message = "Telefon numarası uzunluğu geçersiz")
     private String telephone;
+    @NotBlank(message = "TC no boş olamaz")
+    @Size(min =11,max = 11,message = "numarası uzunluğu geçersiz")
+    private String tcNo;
 
     public String getFirstName() {
         return firstName;
@@ -42,5 +46,11 @@ public class StudentCreateRequest {
     }
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+    public String getTcNo() {
+        return tcNo;
+    }
+    public void setTcNo(String tcNo) {
+        this.tcNo = tcNo;
     }
 }

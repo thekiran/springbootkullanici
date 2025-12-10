@@ -21,6 +21,10 @@ public class StudentUpdateRequest {
     @Size(min = 10, max = 20, message = "Telefon numarası uzunluğu geçersiz")
     private String phoneNumber;
 
+    @NotBlank(message = "TC no boş olamaz")
+    @Size(min =11,max = 11,message = "numarası uzunluğu geçersiz")
+    private String tcNo;
+
     // GETTER / SETTER
 
     public String getFirstName() {
@@ -54,4 +58,8 @@ public class StudentUpdateRequest {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public String getTcNo() {return tcNo;}
+
+    public void setTcNo(String tcNo) {this.tcNo = tcNo;}
 }

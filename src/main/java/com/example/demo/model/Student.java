@@ -23,14 +23,18 @@ public class Student {
     @Column(nullable = false)
     private String phoneNumber;
 
+    @Column(nullable = false)
+    private String tcNo;
+
     public Student() {}
 
-    public Student(int id, String firstName, String lastName, String email, String phoneNumber) {
+    public Student(int id, String firstName, String lastName, String email, String phoneNumber, String tcNo) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.tcNo = tcNo;
     }
     public int getId() {
         return id;
@@ -62,4 +66,7 @@ public class Student {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+    public String getTcNo() {return this.tcNo;}
+    public  void setTcNo(String tcNo) {this.tcNo = tcNo;}
+
 }

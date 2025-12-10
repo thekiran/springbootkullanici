@@ -5,6 +5,7 @@ import com.example.demo.dto.StudentResponse;
 import com.example.demo.dto.StudentUpdateRequest;
 import com.example.demo.model.Student;
 import com.example.demo.util.PhoneMaskUtil;
+import com.example.demo.util.TcNoMaskUtil;
 
 public class StudentMapper {
 
@@ -14,6 +15,7 @@ public class StudentMapper {
         s.setLastName(dto.getLastName());
         s.setEmail(dto.getEmail());
         s.setPhoneNumber(dto.getTelephone());
+        s.setTcNo(dto.getTcNo());
         return s;
     }
 
@@ -23,6 +25,7 @@ public class StudentMapper {
         s.setLastName(dto.getLastName());
         s.setEmail(dto.getEmail());
         s.setPhoneNumber(dto.getPhoneNumber());
+        s.setTcNo(dto.getTcNo());
         return s;
     }
 
@@ -32,7 +35,8 @@ public class StudentMapper {
                 entity.getFirstName(),
                 entity.getLastName(),
                 entity.getEmail(),
-                PhoneMaskUtil.mask(entity.getPhoneNumber())
+                PhoneMaskUtil.mask(entity.getPhoneNumber()),
+                TcNoMaskUtil.mask(entity.getTcNo())
         );
     }
 }

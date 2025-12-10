@@ -86,7 +86,15 @@ public class StudentController {
     @GetMapping("/{id}/phone-masked")
     public ResponseEntity<String> getMaskedPhone(@PathVariable int id) {
         Student s = studentService.getStudentById(id);
-        String masked = studentService.maskPhoneNumber(s.getPhoneNumber());
+        String masked = String.valueOf(studentService.processPhoneNumber(s.getPhoneNumber()));
         return ResponseEntity.ok(masked);
     }
+
+    @GetMapping("/{id}/tc-masked")
+    public ResponseEntity<String> maskedtcNo(@PathVariable int id) {
+        Student s = studentService.getStudentById(id);
+        String masked = String.valueOf(studentService.processTcNo(s.getTcNo()));
+        return ResponseEntity.ok(masked);
+    }
+
 }
