@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.example.demo.util.StudentNormalizeUtil.normalize;
+import static com.example.demo.util.StudentValidator.basicFieldChecks;
+
 @Service
 public class StudentService {
 
@@ -21,7 +24,7 @@ public class StudentService {
     }
 
     public Student addStudent(Student student) {
-        normalizeStudent(student);
+        normalize(student);
         validateStudentForCreate(student);
         return studentRepository.save(student);
     }
@@ -44,7 +47,7 @@ public class StudentService {
         existing.setEmail(updatedData.getEmail());
         existing.setPhoneNumber(updatedData.getPhoneNumber());
 
-        normalizeStudent(existing);
+        normalize(existing);
         validateStudentForUpdate(existing);
 
         return studentRepository.save(existing);
@@ -58,7 +61,7 @@ public class StudentService {
         return true;
     }
 
-    // ---------- VALIDASYON ----------
+    // ---------- BUSINESS VALIDATION (iş kuralları) ----------
 
     private void validateStudentForCreate(Student student) {
         basicFieldChecks(student);
@@ -79,70 +82,6 @@ public class StudentService {
         }
 
     }
-
-    private void basicFieldChecks(Student student) {
-        if (student.getFirstName() == null || student.getFirstName().isBlank()) {
-            throw new IllegalArgumentException("Ad alanı boş olamaz");
-        }
-
-        if (student.getLastName() == null || student.getLastName().isBlank()) {
-            throw new IllegalArgumentException("Soyad alanı boş olamaz");
-        }
-
-        if (student.getEmail() == null || student.getEmail().isBlank()) {
-            throw new IllegalArgumentException("Email alanı boş olamaz");
-        }
-
-        if (student.getPhoneNumber() == null || student.getPhoneNumber().isBlank()) {
-            throw new IllegalArgumentException("Telefon alanı boş olamaz");
-        }
-        if (student.getTcNo() == null || student.getTcNo().isBlank()) {
-            throw new IllegalArgumentException("Tc no boş olamaz");
-        }
-    }
-
-    // ---------- NORMALİZASYON ----------
-
-    private void normalizeStudent(Student student) {
-        if (student.getLastName() != null) {
-            student.setLastName(
-                    student.getLastName()
-                            .trim()
-                            .toUpperCase()
-            );
-        }
-
-        if(student.getEmail() != null) {
-            student.setEmail(
-                    student.getEmail()
-                            .trim()
-                            .toLowerCase()
-            );
-        }
-
-        if (student.getFirstName() != null) {
-            student.setFirstName(
-                    capitalize(student.getFirstName())
-            );
-        }
-
-        if (student.getPhoneNumber() != null) {
-            student.setPhoneNumber(student.getPhoneNumber().trim());
-        }
-
-        if (student.getTcNo() != null) {
-            student.setTcNo(student.getTcNo().trim());
-        }
-    }
-
-    private String capitalize(String text) {
-        text = text.trim();
-        if (text.isEmpty()) return text;
-
-        return text.substring(0, 1).toUpperCase() +
-                text.substring(1).toLowerCase();
-    }
-
 
     // NameResponse
     public NameResponse processName(String firstName) {
