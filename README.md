@@ -1,3 +1,4 @@
+```
 src
  └── main
      └── java
@@ -33,3 +34,5 @@ src
                      │
                      └── exception
                            └── GlobalExceptionHandler.java
+
+```
